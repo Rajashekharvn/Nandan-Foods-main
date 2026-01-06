@@ -3,68 +3,94 @@ import { assets } from '../assets/assets'
 
 const Contact = () => {
     return (
-        <div className='flex flex-col justify-center items-center py-10 md:py-16 bg-white min-h-[60vh]'>
-
-            <div className='text-center mb-10 md:mb-16'>
-                <p className='text-3xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent mb-3'>
-                    Contact Us
-                </p>
-                <div className="h-1 w-20 bg-emerald-500 mx-auto rounded-full"></div>
-            </div>
-
-            <div className='flex flex-col md:flex-row justify-center gap-10 md:gap-20 mb-20 max-w-6xl w-full px-6'>
-                <div className="flex-1 rounded-2xl overflow-hidden shadow-lg h-[300px] md:h-[450px]">
-                    <img className='w-full h-full object-cover' src={assets.contact_img || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2574&auto=format&fit=crop"} alt="Contact Us" />
+        <div className="bg-gray-50 min-h-[80vh] py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-700 to-emerald-500 bg-clip-text text-transparent mb-4">
+                        Get in Touch
+                    </h2>
+                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                        We'd love to hear from you. Visit us at our store, give us a call, or send us an email.
+                    </p>
+                    <div className="h-1.5 w-24 bg-emerald-500 mx-auto rounded-full mt-6"></div>
                 </div>
 
-                <div className='flex flex-col justify-center items-start flex-1 gap-8'>
-                    <div className='space-y-4'>
-                        <h3 className='font-bold text-2xl text-gray-800 flex items-center gap-2'>
-                            <span className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                                </svg>
-                            </span>
-                            Our Store
-                        </h3>
-                        <div className='text-gray-600 ml-10'>
-                            <p><a href="https://maps.app.goo.gl/TFktq6DKmnjw7Nvx8" target="_blank" rel="noopener noreferrer">
-                               Nirmal Jothi Nilaya<br/>
-                               near New Bus Stand, Jaynagar<br/>
-                               Shiggaon -581205</a></p>
-                        </div>
-                        <div className='text-gray-600 ml-10 space-y-1'>
-                            <p className='flex items-center gap-2'>
-                                <span className='font-medium text-gray-800'> Store 1: <a href="tel:+919380031861">+91 93800 31861</a></span>
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <span className='font-medium text-gray-800'>Store 2: <a href="tel:+916362981088">+91 63629 81088</a></span>
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <span className='font-medium text-gray-800'>Email: <a href="mailto:nandanfoods@yahoo.com">nandanfoods@yahoo.com</a></span>
-                            </p>
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
+                    {/* Visual / Image Section */}
+                    <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[600px] group">
+                        <img
+                            className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
+                            src={assets.contact_img || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2574&auto=format&fit=crop"}
+                            alt="Contact Us"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+                            <p className="text-white text-xl font-medium tracking-wide">Always fresh, always Nandan.</p>
                         </div>
                     </div>
 
-                    {/* <div className='w-full h-px bg-gray-200'></div> */}
+                    {/* Contact Info Cards */}
+                    <div className="flex flex-col gap-6">
 
-                    {/* <div className='space-y-4'>
-                        <h3 className='font-bold text-2xl text-gray-800 flex items-center gap-2'>
-                            <span className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.632-1.242a2.201 2.201 0 0 1-.672-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                        {/* Location Card */}
+                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group">
+                            <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                 </svg>
-                            </span>
-                            Careers at Nandan Foods
-                        </h3>
-                        <p className='text-gray-600 ml-10'>
-                            Learn more about our teams and job openings.
-                        </p>
-                        <button className='ml-10 border border-emerald-600 text-emerald-600 px-8 py-3 rounded-lg text-sm font-semibold hover:bg-emerald-600 hover:text-white transition-all duration-300 transform hover:scale-105'>
-                            Explore Jobs
-                        </button>
-                    </div> */}
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-3">Visit Our Store</h3>
+                            <p className="text-gray-600 leading-relaxed mb-6">
+                                Nirmal Jothi Nilaya, near New Bus Stand<br />
+                                Jaynagar, Shiggaon - 581205
+                            </p>
+                            <a
+                                href="https://maps.app.goo.gl/TFktq6DKmnjw7Nvx8"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 hover:underline gap-2"
+                            >
+                                View on Google Maps
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        {/* Contact Details Grid (Phone & Email) */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            {/* Phone Card */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
+                                <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-100 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                                    </svg>
+                                </div>
+                                <h4 className="text-lg font-bold text-gray-900 mb-2">Call Us</h4>
+                                <div className="space-y-1">
+                                    <p className='text-xs text-gray-400 font-medium uppercase'>Store 1</p>
+                                    <a href="tel:+919380031861" className="block text-gray-700 font-medium hover:text-emerald-600 transition-colors">+91 93800 31861</a>
+                                    <p className='text-xs text-gray-400 font-medium uppercase mt-2'>Store 2</p>
+                                    <a href="tel:+916362981088" className="block text-gray-700 font-medium hover:text-emerald-600 transition-colors">+91 63629 81088</a>
+                                </div>
+                            </div>
+
+                            {/* Email Card */}
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group">
+                                <div className="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-purple-600 mb-4 group-hover:bg-purple-100 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                    </svg>
+                                </div>
+                                <h4 className="text-lg font-bold text-gray-900 mb-2">Email Us</h4>
+                                <a href="mailto:nandanfoods@yahoo.com" className="text-gray-600 hover:text-emerald-600 transition-colors break-words font-medium">nandanfoods@yahoo.com</a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
