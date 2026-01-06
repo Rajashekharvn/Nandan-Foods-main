@@ -27,11 +27,19 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const { data } = await axios.get("/api/order/seller");
+      // Add timestamp to prevent caching
+      const { data } = await axios.get(`/api/order/seller?t=${new Date().getTime()}`);
       if (data.success) {
+        // Debugging logs
+        console.log("Polling orders: ", data.orders.length, "Previous:", ordersRef.current.length, "FirstLoad:", firstLoad.current);
+
         if (data.orders.length > ordersRef.current.length && !firstLoad.current) {
+          console.log("New order detected! Playing sound...");
           const audio = new Audio(assets.order_sound);
-          audio.play().catch((error) => console.error("Audio play failed:", error));
+          audio.play().catch((error) => {
+            console.error("Audio play failed:", error);
+            toast.error("Audio play failed: " + error.message);
+          });
           toast.success("New Order Received!");
         }
 
