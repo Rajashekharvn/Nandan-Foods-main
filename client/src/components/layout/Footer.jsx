@@ -1,5 +1,5 @@
 import React from "react";
-import { assets, footerLinks } from "../assets/assets";
+import { assets, footerLinks } from "../../assets/assets";
 
 const Footer = () => {
   return (
@@ -8,8 +8,8 @@ const Footer = () => {
         <div>
           <img className="w-34 md:w-32" src={assets.logo} alt="logo" />
           <p className="max-w-[410px] mt-6">
-            Bringing you the authentic taste of Uttar Karnataka. From traditional sweets 
-              to pickles, every item is prepared with care, purity, and time-honored recipes.
+            Bringing you the authentic taste of Uttar Karnataka. From traditional sweets
+            to pickles, every item is prepared with care, purity, and time-honored recipes.
           </p>
         </div>
         <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5">

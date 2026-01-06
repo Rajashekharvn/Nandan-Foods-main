@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../../context/AppContext";
 import ProductCard from "../components/ProductCard";
-import { assets } from "../assets/assets";
+import { assets } from "../../../assets/assets";
 
 const AllProducts = () => {
   const { products, searchQuery } = useAppContext();

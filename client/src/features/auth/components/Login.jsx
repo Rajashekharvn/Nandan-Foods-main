@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { assets } from "../assets/assets";
+import { assets } from "../../../assets/assets";
 import toast from "react-hot-toast";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../../context/AppContext";
 
 const Login = () => {
   // Global States

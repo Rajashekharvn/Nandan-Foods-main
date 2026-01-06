@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
-import Loading from "./Loading";
+import { useAppContext } from "../../../context/AppContext";
+import Loading from "../../../components/ui/Loading";
 
 const ProtectedRoute = ({ children }) => {
     const { user, setshowUserLogin, isAuthLoading } = useAppContext();
