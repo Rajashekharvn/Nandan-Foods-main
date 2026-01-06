@@ -1,0 +1,40 @@
+<svg
+  width="900"
+  height="220"
+  viewBox="0 0 900 220"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <!-- Green gradient for Nandan -->
+    <linearGradient id="nandanGreenAlt" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF84"/>
+      <stop offset="100%" stop-color="#2FA46F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Nandan -->
+  <text
+    x="40"
+    y="145"
+    font-size="120"
+    font-family="Nunito, Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="800"
+    fill="url(#nandanGreenAlt)"
+    letter-spacing="-1"
+  >
+    Nandan
+  </text>
+
+  <!-- Foods -->
+  <text
+    x="490"
+    y="145"
+    font-size="120"
+    font-family="Nunito, Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="500"
+    fill="#6B7280"
+    letter-spacing= "-1"
+  >
+    Foods
+  </text>
+</svg>
