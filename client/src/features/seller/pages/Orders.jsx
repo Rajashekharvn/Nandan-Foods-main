@@ -9,6 +9,19 @@ const Orders = () => {
   const ordersRef = useRef([]);
   const firstLoad = useRef(true);
 
+  const [audioAllowed, setAudioAllowed] = useState(false);
+
+  const enableAudio = () => {
+    const audio = new Audio(assets.order_sound);
+    audio.play().then(() => {
+      setAudioAllowed(true);
+      toast.success("Sound notifications enabled!");
+    }).catch((error) => {
+      console.error("Audio enable failed:", error);
+      toast.error("Could not enable audio: " + error.message);
+    });
+  };
+
   const statusHandler = async (event, orderId) => {
     try {
       const { data } = await axios.post("/api/order/status", {
@@ -34,13 +47,15 @@ const Orders = () => {
         console.log("Polling orders: ", data.orders.length, "Previous:", ordersRef.current.length, "FirstLoad:", firstLoad.current);
 
         if (data.orders.length > ordersRef.current.length && !firstLoad.current) {
-          console.log("New order detected! Playing sound...");
-          const audio = new Audio(assets.order_sound);
-          audio.play().catch((error) => {
-            console.error("Audio play failed:", error);
-            toast.error("Audio play failed: " + error.message);
-          });
+          console.log("New order detected!");
           toast.success("New Order Received!");
+
+          if (audioAllowed) {
+            const audio = new Audio(assets.order_sound);
+            audio.play().catch((error) => {
+              console.error("Audio play failed:", error);
+            });
+          }
         }
 
         setOrders(data.orders);
@@ -59,12 +74,23 @@ const Orders = () => {
 
     const intervalId = setInterval(fetchOrders, 5000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [audioAllowed]); // Add audioAllowed dependency to keep closure fresh if needed, though ref usage is better. simpler to just leave dependency array or add it.
 
   return (
     <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll">
       <div className="md:p-10 p-4 space-y-4">
-        <h2 className="text-lg font-medium">Orders List</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg font-medium">Orders List</h2>
+          {!audioAllowed && (
+            <button
+              onClick={enableAudio}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition flex items-center gap-2"
+            >
+              <img src={assets.order_icon} className="w-5 h-5 filter invert" alt="" />
+              Enable Sound
+            </button>
+          )}
+        </div>
         {orders.map((order, index) => (
           <div
             key={index}
