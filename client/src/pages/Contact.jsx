@@ -19,8 +19,8 @@ const Contact = () => {
                 {/* Main Content Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 
-                    {/* Visual / Image Section */}
-                    <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[350px] md:h-auto min-h-[400px] group border border-gray-100">
+                    {/* Visual / Image Section - Matches height of right column */}
+                    <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full h-full min-h-[300px] md:min-h-0 group border border-gray-100 order-last md:order-first">
                         <img
                             className='w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110'
                             src={assets.contact_img || "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2574&auto=format&fit=crop"}
@@ -35,11 +35,10 @@ const Contact = () => {
                     </div>
 
                     {/* Contact Info Cards */}
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-5 h-full justify-center">
 
                         {/* Location Card */}
                         <div className="bg-white p-7 rounded-3xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:border-emerald-100 transition-all duration-300 group relative overflow-hidden">
-                            {/* Hover Gradient Background */}
                             <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                             <div className="relative flex items-start gap-5">
