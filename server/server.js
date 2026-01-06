@@ -70,8 +70,9 @@ app.use("/api/order", orderRouter);
 // Export app for Vercel
 export default app;
 
-// Only listen if not running in Vercel (local dev)
-if (process.env.NODE_ENV !== 'production') {
+// Listen if strictly local OR running on Render
+// Vercel serverless will skip this because NODE_ENV is production and RENDER is undefined
+if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
