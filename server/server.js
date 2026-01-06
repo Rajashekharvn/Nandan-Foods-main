@@ -74,6 +74,6 @@ export default app;
 // Vercel serverless will skip this because NODE_ENV is production and RENDER is undefined
 if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
   app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server started on port ${port}`);
   });
 }
