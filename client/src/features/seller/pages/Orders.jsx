@@ -56,7 +56,20 @@ const Orders = () => {
   return (
     <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll">
       <div className="md:p-10 p-4 space-y-4">
-        <h2 className="text-lg font-medium">Orders List</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg font-medium">Orders List</h2>
+          <button
+            onClick={() => {
+              const audio = new Audio(assets.order_sound);
+              audio.play()
+                .then(() => toast.success("Sound playing!"))
+                .catch((e) => toast.error("Sound failed: " + e.message));
+            }}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
+          >
+            Test Sound
+          </button>
+        </div>
         {orders.map((order, index) => (
           <div
             key={index}
