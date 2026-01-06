@@ -11,16 +11,27 @@ const Orders = () => {
 
   const [audioAllowed, setAudioAllowed] = useState(false);
 
-  const enableAudio = () => {
-    const audio = new Audio(assets.order_sound);
-    audio.play().then(() => {
-      setAudioAllowed(true);
-      toast.success("Sound notifications enabled!");
-    }).catch((error) => {
-      console.error("Audio enable failed:", error);
-      toast.error("Could not enable audio: " + error.message);
-    });
-  };
+  useEffect(() => {
+    const unlockAudio = () => {
+      const audio = new Audio(assets.order_sound);
+      audio.muted = true;
+      audio.play().then(() => {
+        setAudioAllowed(true);
+        // audio.muted = false; // logic checks audioAllowed, so next play will be audible new instance
+        console.log("Audio unlocked");
+      }).catch((e) => console.log("Audio unlock failed", e));
+
+      // Request browser notification permission
+      if ("Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
+
+      document.removeEventListener('click', unlockAudio);
+    };
+
+    document.addEventListener('click', unlockAudio);
+    return () => document.removeEventListener('click', unlockAudio);
+  }, []);
 
   const statusHandler = async (event, orderId) => {
     try {
@@ -79,18 +90,7 @@ const Orders = () => {
   return (
     <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll">
       <div className="md:p-10 p-4 space-y-4">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-medium">Orders List</h2>
-          {!audioAllowed && (
-            <button
-              onClick={enableAudio}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition flex items-center gap-2"
-            >
-              <img src={assets.order_icon} className="w-5 h-5 filter invert" alt="" />
-              Enable Sound
-            </button>
-          )}
-        </div>
+        <h2 className="text-lg font-medium">Orders List</h2>
         {orders.map((order, index) => (
           <div
             key={index}
