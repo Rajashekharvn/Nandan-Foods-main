@@ -50,28 +50,29 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="p-3 sm:p-4 flex flex-col flex-grow">
-          <p className="text-[10px] sm:text-xs font-medium text-emerald-600 uppercase tracking-wider mb-1">
-            {product.category}
-          </p>
+          <div className="flex justify-between items-start mb-1">
+            <p className="text-[10px] sm:text-xs font-medium text-emerald-600 uppercase tracking-wider">
+              {product.category}
+            </p>
+            <div className="flex items-center gap-1">
+              <div className="flex text-yellow-400 text-[10px] sm:text-xs">
+                {Array(5)
+                  .fill("")
+                  .map((_, i) => (
+                    <img
+                      key={i}
+                      className="w-2.5 h-2.5 sm:w-3 sm:h-3"
+                      src={i < 4 ? assets.star_icon : assets.star_dull_icon}
+                      alt="star"
+                    />
+                  ))}
+              </div>
+              <span className="text-[10px] sm:text-xs text-gray-400 font-medium">({4})</span>
+            </div>
+          </div>
           <h3 className="text-gray-900 font-semibold text-sm sm:text-lg mb-1 leading-tight line-clamp-2 min-h-[2rem] sm:min-h-[2.5rem]">
             {product.name}
           </h3>
-
-          <div className="flex items-center gap-1 mb-2 sm:mb-3">
-            <div className="flex text-yellow-400 text-[10px] sm:text-xs">
-              {Array(5)
-                .fill("")
-                .map((_, i) => (
-                  <img
-                    key={i}
-                    className="w-2.5 h-2.5 sm:w-3 sm:h-3"
-                    src={i < 4 ? assets.star_icon : assets.star_dull_icon}
-                    alt="star"
-                  />
-                ))}
-            </div>
-            <span className="text-[10px] sm:text-xs text-gray-400 font-medium">({4})</span>
-          </div>
 
           {/* Weight Selection - Only show if product has available weights */}
           {product.availableWeights && product.availableWeights.length > 0 && (
