@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
         }}
         className="group relative flex flex-col justify-between border border-gray-100 rounded-xl bg-white w-full transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-emerald-500/10 hover:border-emerald-500/50 hover:-translate-y-1 overflow-hidden"
       >
-        <div className="relative flex items-center justify-center h-48 sm:h-60 bg-gray-50/50 group-hover:bg-gray-50 transition-colors p-4 overflow-hidden">
+        <div className="relative flex items-center justify-center h-40 sm:h-48 bg-gray-50/50 group-hover:bg-gray-50 transition-colors p-3 overflow-hidden">
           <img
             className={`w-full h-full object-contain transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:rotate-1 ${!product.inStock ? "opacity-50 grayscale" : ""
               }`}
@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
 
           {/* Sale Badge */}
           {currentVariant.price > currentVariant.offerPrice && product.inStock && (
-            <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full shadow-sm z-10 flex items-center gap-1">
+            <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-1">
               <span className="tracking-wide">
                 {Math.round(((currentVariant.price - currentVariant.offerPrice) / currentVariant.price) * 100)}% OFF
               </span>
@@ -59,10 +59,10 @@ const ProductCard = ({ product }) => {
           )}
         </div>
 
-        <div className="p-4 flex flex-col flex-grow">
+        <div className="p-3 flex flex-col flex-grow">
           {/* Header: Category & Rating */}
-          <div className="flex justify-between items-start mb-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+          <div className="flex justify-between items-start mb-1.5">
+            <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
               {product.category}
             </span>
             <div className="flex items-center gap-1 bg-white">
@@ -89,7 +89,7 @@ const ProductCard = ({ product }) => {
 
           {/* Weight Selection */}
           {product.availableWeights && product.availableWeights.length > 0 && (
-            <div className={`flex flex-wrap gap-2 mb-3 overflow-x-auto no-scrollbar scroll-smooth ${product.availableWeights.length > 3 ? 'justify-start' : 'justify-start'}`}>
+            <div className={`flex flex-wrap gap-1.5 mb-2 overflow-x-auto no-scrollbar scroll-smooth ${product.availableWeights.length > 3 ? 'justify-start' : 'justify-start'}`}>
               {product.availableWeights.map((weight, idx) => (
                 <button
                   key={idx}
@@ -97,7 +97,7 @@ const ProductCard = ({ product }) => {
                     e.stopPropagation();
                     setSelectedWeight(weight);
                   }}
-                  className={`px-2.5 py-1 text-[10px] sm:text-xs font-semibold rounded-md transition-all duration-200 border shadow-sm flex-shrink-0 ${selectedWeight === weight
+                  className={`px-2 py-0.5 text-[10px] sm:text-xs font-semibold rounded-md transition-all duration-200 border shadow-sm flex-shrink-0 ${selectedWeight === weight
                       ? "bg-emerald-600 text-white border-emerald-600"
                       : "bg-gray-50 text-gray-700 border-gray-200 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50"
                     }`}
@@ -108,7 +108,7 @@ const ProductCard = ({ product }) => {
             </div>
           )}
 
-          <div className="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between gap-3">
+          <div className="mt-auto pt-2 border-t border-gray-50 flex items-center justify-between gap-2">
             <div className="flex flex-col">
               <span className="text-lg sm:text-xl font-extrabold text-emerald-700 leading-none">
                 {currency}{currentVariant.offerPrice}
@@ -134,7 +134,7 @@ const ProductCard = ({ product }) => {
                     }
                     addToCart(product._id, selectedWeight);
                   }}
-                  className={`relative overflow-hidden h-9 px-4 sm:px-5 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform active:scale-95 flex items-center gap-2 shadow-sm hover:shadow-md ${!product.inStock
+                  className={`relative overflow-hidden h-8 px-3 sm:px-4 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform active:scale-95 flex items-center gap-2 shadow-sm hover:shadow-md ${!product.inStock
                     ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                     : "bg-emerald-600 text-white hover:bg-emerald-700"
                     }`}
@@ -143,7 +143,7 @@ const ProductCard = ({ product }) => {
                   <span>ADD</span>
                 </button>
               ) : (
-                <div className="flex items-center h-9 bg-white border border-emerald-200 rounded-lg overflow-hidden shadow-sm">
+                <div className="flex items-center h-8 bg-white border border-emerald-200 rounded-lg overflow-hidden shadow-sm">
                   <button
                     onClick={() => removeFromCart(product._id, selectedWeight)}
                     className="w-8 h-full flex items-center justify-center text-emerald-600 hover:bg-emerald-50 transition-colors text-lg font-bold"
