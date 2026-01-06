@@ -31,11 +31,11 @@ const ProductCard = ({ product }) => {
           );
           scrollTo(0, 0);
         }}
-        className="group relative flex flex-col justify-between border border-gray-100 rounded-xl bg-white w-full transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-1 overflow-hidden"
+        className="group relative flex flex-col justify-between border border-gray-100 rounded-xl bg-white w-full transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-emerald-500/10 hover:border-emerald-500/50 hover:-translate-y-1 overflow-hidden"
       >
         <div className="relative flex items-center justify-center h-48 sm:h-60 bg-gray-50/50 group-hover:bg-gray-50 transition-colors p-4 overflow-hidden">
           <img
-            className={`w-full h-full object-contain transition-transform duration-700 ease-in-out group-hover:scale-110 ${!product.inStock ? "opacity-50 grayscale" : ""
+            className={`w-full h-full object-contain transition-transform duration-700 ease-in-out group-hover:scale-110 group-hover:rotate-1 ${!product.inStock ? "opacity-50 grayscale" : ""
               }`}
             src={product.image?.[0]}
             alt={product.name}
@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
         <div className="p-4 flex flex-col flex-grow">
           {/* Header: Category & Rating */}
           <div className="flex justify-between items-start mb-2">
-            <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider border border-emerald-100">
+            <span className="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
               {product.category}
             </span>
             <div className="flex items-center gap-1 bg-white">
@@ -79,6 +79,13 @@ const ProductCard = ({ product }) => {
           <h3 className="text-gray-800 font-bold text-sm sm:text-base mb-1 leading-tight line-clamp-2 min-h-[2.2rem]">
             {product.name}
           </h3>
+
+          {/* Low Stock Indicator */}
+          {product.stock && product.stock < 10 && product.inStock && (
+            <p className="text-[10px] text-orange-500 font-medium mb-1">
+              Only {product.stock} left!
+            </p>
+          )}
 
           {/* Weight Selection */}
           {product.availableWeights && product.availableWeights.length > 0 && (
@@ -101,7 +108,7 @@ const ProductCard = ({ product }) => {
 
           <div className="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between gap-3">
             <div className="flex flex-col">
-              <span className="text-lg sm:text-xl font-extrabold text-gray-900 leading-none">
+              <span className="text-lg sm:text-xl font-extrabold text-emerald-700 leading-none">
                 {currency}{currentVariant.offerPrice}
               </span>
               {currentVariant.price > currentVariant.offerPrice && (
