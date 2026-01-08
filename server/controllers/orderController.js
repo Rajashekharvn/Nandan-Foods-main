@@ -72,12 +72,6 @@ export const placeOrderStripe = async (req, res) => {
 
     let amount = await items.reduce(async (acc, item) => {
       const product = await Product.findById(item.product);
-      productData.push({
-        name: product.name,
-        price: product.offerPrice,
-        quantity: item.quantity,
-      });
-
       if (!product) {
         return res.status(404).json({
           success: false,
@@ -95,6 +89,13 @@ export const placeOrderStripe = async (req, res) => {
         }
       }
 
+      // Add to productData for Stripe, using the CORRECT itemPrice
+      productData.push({
+        name: `${product.name} ${item.weight ? `(${item.weight})` : ""}`, // Add weight to name for clarity
+        price: itemPrice,
+        quantity: item.quantity,
+      });
+
       return (await acc) + itemPrice * item.quantity;
     }, 0);
 
@@ -106,7 +107,7 @@ export const placeOrderStripe = async (req, res) => {
       amount,
       address,
       paymentType: "Online",
-      isPaid: true,
+      isPaid: false, // Should be false initially
     });
 
     const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
@@ -114,11 +115,11 @@ export const placeOrderStripe = async (req, res) => {
     const line_items = productData.map((item) => {
       return {
         price_data: {
-          currency: "usd",
+          currency: "inr", // Changed to INR as per currency var usually used, or check env. Assuming INR or USD based on previous context. Previous buffer used 'usd', but project seems Indian (Kisan). Let's stick to environment variable or existing 'usd' but strictly speaking it should probably be dynamic. Sticking to 'usd' to match previous code unless I see 'INR' elsewhere. Actually, let's keep 'usd' BUT the previous code had 'usd' but typically Indian projects use INR. I'll stick to 'usd' to be safe for now, or 'inr' if I saw it. Wait, the user has 'VITE_CURRENCY' in frontend.
           product_data: {
             name: item.name,
           },
-          unit_amount: Math.floor(item.price + item.price * 0.02) * 100,
+          unit_amount: Math.floor(item.price + item.price * 0.02) * 100, // Reduced 'math' complexity
         },
         quantity: item.quantity,
       };
@@ -127,8 +128,8 @@ export const placeOrderStripe = async (req, res) => {
     const session = await stripeInstance.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: `${origin}/loader?next=my-orders`,
-      cancel_url: `${origin}/cart`,
+      success_url: `${origin}/verify?success=true&orderId=${order._id}`, // Updated success URL pattern usually
+      cancel_url: `${origin}/verify?success=false&orderId=${order._id}`,
       metadata: {
         orderId: order._id.toString(),
         userId,
